@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Monta a prova de direção do novo site da MATA em um arquivo único (preview/index.html).
+"""Monta a abertura (site/v3) do novo site da MATA em um arquivo único (preview/index.html).
 
 Uso: python3 site/build.py
 """
@@ -8,7 +8,7 @@ import re
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-V2 = ROOT / "site" / "v2"
+V3 = ROOT / "site" / "v3"
 ASSETS = ROOT / "site" / "assets"
 THREE_CDN = "https://cdn.jsdelivr.net/npm/three@0.149.0/build/three.min.js"
 
@@ -33,13 +33,14 @@ def logo():
 
 
 def main():
-    page = (V2 / "index.html").read_text()
+    page = (V3 / "index.html").read_text()
     page = (page.replace("/*__FONTS__*/", fonts())
                 .replace("__LOGO__", logo())
                 .replace("__IMG_PILOTO__", data_uri(ASSETS / "mata-3d-piloto.webp", "image/webp"))
                 .replace("__IMG_ACOPLAMENTO__", data_uri(ASSETS / "mata-3d-acoplamento.webp", "image/webp"))
                 .replace("__THREE__", THREE_CDN)
-                .replace("/*__STAGE__*/", (V2 / "stage.js").read_text()))
+                .replace("__IMG_GRAD__", data_uri(ASSETS / "mata-gradiente.webp", "image/webp"))
+                .replace("/*__SCENE__*/", (V3 / "scene.js").read_text()))
     out = ROOT / "preview"
     out.mkdir(exist_ok=True)
     (out / "index.html").write_text(page)

@@ -1,0 +1,136 @@
+<title>Novo site da MATA</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="A MATA é um time de marketing que se acopla à sua empresa. Poucas pessoas experientes, pilotando inteligência artificial com o conhecimento do seu negócio.">
+<style>
+/*__FONTS__*/
+/* Layout: abertura centralizada em tela fixa; frases curtas trocam no centro enquanto as peças 3D se acoplam. Tema único e claro. */
+:root{
+  --ice:#F1F2F6;
+  --ink:#0E3328;
+  --soft:#4F5D58;
+  --forest:#0E4333;
+  --display:"Stack Sans Headline","Helvetica Neue",Arial,sans-serif;
+  --text:"Stack Sans Text","Helvetica Neue",Arial,sans-serif;
+  --label:"Stack Sans Notch","Stack Sans Text","Helvetica Neue",Arial,sans-serif;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{margin:0;background:var(--ice);color:var(--ink);font:400 1.08rem/1.6 var(--text);-webkit-font-smoothing:antialiased;overflow-x:hidden;font-synthesis:none}
+h1,h2,p{margin:0}
+a{color:var(--forest)}
+:focus-visible{outline:2px solid var(--forest);outline-offset:4px;border-radius:6px}
+.gut{padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+@media (min-width:760px){.gut{padding-left:max(40px,env(safe-area-inset-left,0px));padding-right:max(40px,env(safe-area-inset-right,0px))}}
+
+.bar{position:fixed;inset:0 0 auto;z-index:20;padding-top:env(safe-area-inset-top,0px)}
+.bar .in{display:flex;align-items:center;justify-content:space-between;min-height:76px}
+.bar svg{width:92px;height:auto;display:block;fill:#000}
+.bar a.talk{font:500 .92rem/1 var(--text);color:var(--ink);text-decoration:none;padding:12px 2px;border-bottom:1px solid rgba(14,51,40,.35)}
+.bar a.talk:hover{border-bottom-color:var(--ink)}
+
+.intro{position:relative;height:440svh}
+.pin{position:sticky;top:0;height:100svh;overflow:hidden}
+.pin .scene{position:absolute;inset:0;background:var(--ice)}
+.pin canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+.pin .fallback{position:absolute;left:50%;top:58%;width:min(70vw,720px);transform:translate(-50%,-50%);border-radius:24px}
+.lines{position:absolute;inset:0;pointer-events:none}
+.line{position:absolute;left:0;right:0;top:36%;transform:translateY(-50%);text-align:center;opacity:0;transition:opacity .9s ease,transform .9s cubic-bezier(.2,.7,.2,1)}
+.line.on{opacity:1;transform:translateY(-50%)}
+.line:not(.on){transform:translateY(calc(-50% + 14px))}
+.line h1,.line p{margin:0 auto;font-family:var(--display);font-weight:300;color:var(--ink);text-wrap:balance}
+.line h1{font-size:clamp(2.5rem,7vw,7.2rem);line-height:.93;letter-spacing:-.055em;max-width:12ch}
+.line p{font-size:clamp(1.9rem,4.4vw,4.4rem);line-height:.98;letter-spacing:-.045em;max-width:15ch}
+.cue{position:absolute;left:50%;bottom:calc(28px + env(safe-area-inset-bottom,0px));width:1px;height:46px;background:rgba(14,51,40,.18);overflow:hidden;transition:opacity .6s}
+.cue::after{content:"";position:absolute;left:0;top:-46px;width:1px;height:46px;background:var(--ink)}
+@media (prefers-reduced-motion:no-preference){.cue::after{animation:cue 2.4s cubic-bezier(.6,0,.2,1) infinite}}
+@keyframes cue{to{top:46px}}
+.intro.past .cue{opacity:0}
+
+.thesis{text-align:center;padding-block:clamp(120px,18vw,240px) clamp(96px,14vw,180px)}
+.eyebrow{font:600 .72rem/1.3 var(--label);letter-spacing:.16em;text-transform:uppercase;color:var(--soft)}
+.thesis h2{margin:26px auto 0;font:300 clamp(2.2rem,5vw,4.8rem)/.97 var(--display);letter-spacing:-.05em;max-width:13ch;color:var(--ink);text-wrap:balance}
+.thesis p{margin:34px auto 0;max-width:36rem;font-size:clamp(1.05rem,1.3vw,1.2rem);line-height:1.6;color:#2A3A35}
+
+.end{position:relative;isolation:isolate;overflow:hidden;text-align:center;padding-block:clamp(110px,15vw,200px)}
+.end::before{content:"";position:absolute;inset:0;z-index:-1;background:var(--grad) center/cover no-repeat;opacity:.9;-webkit-mask:radial-gradient(70% 80% at 50% 55%,#000 30%,transparent 100%);mask:radial-gradient(70% 80% at 50% 55%,#000 30%,transparent 100%)}
+.end h2{margin:0 auto;font:300 clamp(2rem,4.4vw,4.2rem)/.98 var(--display);letter-spacing:-.05em;max-width:15ch;color:var(--ink);text-wrap:balance}
+.end .acts{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin-top:40px}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:54px;padding:0 28px;border-radius:999px;background:var(--forest);color:#F3F6F4;font:500 1rem/1 var(--text);text-decoration:none;transition:transform .25s ease}
+.btn:hover{transform:translateY(-2px)}
+.btn.light{background:rgba(255,255,255,.65);color:var(--ink);box-shadow:inset 0 0 0 1px rgba(14,51,40,.18)}
+.mail{margin-top:22px;font-size:.95rem;color:var(--soft)}
+footer{display:flex;justify-content:center;padding-block:40px calc(48px + env(safe-area-inset-bottom,0px));font-size:.85rem;color:var(--soft)}
+@media (prefers-reduced-motion:reduce){.line{transition:none}}
+</style>
+
+<div lang="pt-BR">
+<header class="bar"><div class="in gut"><span aria-label="MATA">__LOGO__</span><a class="talk" href="#conversa">Falar com a MATA</a></div></header>
+
+<main>
+  <section class="intro" id="inicio" aria-label="Abertura">
+    <div class="pin">
+      <div class="scene" id="scene" aria-hidden="true"><canvas></canvas></div>
+      <div class="lines gut">
+        <div class="line on" data-i="0"><h1>Um modelo de marketing para a nossa nova realidade</h1></div>
+        <div class="line" data-i="1"><p>Um time de marketing que se acopla à sua empresa</p></div>
+        <div class="line" data-i="2"><p>Poucas pessoas experientes, pilotando inteligência artificial</p></div>
+        <div class="line" data-i="3"><p>E que ficam. A cada mês, o time sabe mais sobre a sua marca</p></div>
+      </div>
+      <div class="cue" aria-hidden="true"></div>
+    </div>
+  </section>
+
+  <section class="thesis gut" aria-labelledby="h-tese">
+    <p class="eyebrow">Por que agora</p>
+    <h2 id="h-tese">A inteligência artificial amplifica quem pilota</h2>
+    <p>Produzir ficou barato, e a execução vai ser cada vez mais automática. O que fica escasso é quem decide o que importa, dá à IA o contexto certo da empresa, julga o que ela entrega e leva o trabalho até o uso. A MATA é esse time, dentro da sua empresa, todos os meses.</p>
+  </section>
+
+  <section class="end gut" id="conversa" aria-labelledby="h-conversa">
+    <h2 id="h-conversa">Conte o que está acontecendo com o marketing da sua empresa</h2>
+    <div class="acts"><a class="btn" href="mailto:hello@wearemata.company">Falar com a MATA</a></div>
+    <p class="mail">hello@wearemata.company</p>
+  </section>
+</main>
+<footer class="gut">MATA, um time de marketing que se acopla à sua empresa.</footer>
+</div>
+
+<script src="__THREE__"></script>
+<script>
+/*__SCENE__*/
+</script>
+<script>
+(function () {
+  document.documentElement.lang = "pt-BR";
+  var host = document.getElementById("scene");
+  var MS = window.MataScene;
+  var scene = null;
+  if (MS && MS.supported()) {
+    scene = new MS.Scene(host, { gradient: "__IMG_GRAD__", lookDrop: -0.95 });
+    window.__mata = scene;
+  } else {
+    var img = document.createElement("img");
+    img.className = "fallback"; img.alt = ""; img.src = "__IMG_PILOTO__";
+    host.appendChild(img);
+  }
+  var intro = document.querySelector(".intro");
+  var lines = Array.prototype.slice.call(document.querySelectorAll(".line"));
+  var current = 0;
+  function update() {
+    var r = intro.getBoundingClientRect();
+    var span = r.height - window.innerHeight;
+    var p = Math.max(0, Math.min(1, -r.top / Math.max(1, span)));
+    var i = Math.min(lines.length - 1, Math.floor(p * lines.length * 0.999 + 0.12));
+    intro.classList.toggle("past", p > 0.04);
+    if (i !== current) {
+      current = i;
+      lines.forEach(function (l, n) { l.classList.toggle("on", n === i); });
+      if (scene) scene.set(i);
+    }
+  }
+  var tick = false;
+  window.addEventListener("scroll", function () { if (!tick) { tick = true; requestAnimationFrame(function () { tick = false; update(); }); } }, { passive: true });
+  update();
+})();
+</script>
